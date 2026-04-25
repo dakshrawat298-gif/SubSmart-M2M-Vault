@@ -24,23 +24,13 @@ const SYSTEM_PROMPT =
 // Simulates a buyer that starts at 60 USDC and inches toward its budget cap.
 // Replace this function body with the real QVAC SDK call when available.
 
-const buyerResponses = [
+const MOCK_RESPONSES = [
   "A standard audit is straightforward work. I'll offer 60 USDC — that's fair market value for this scope.",
   "I understand you have overhead, but 60 USDC is my opening offer. I can stretch to 70 USDC given the complexity.",
   "I appreciate your position. Final push — 78 USDC is as high as I can go without exceeding my authorised limit.",
   "This is my ceiling. 85 USDC, and I need this wrapped today. Take it or leave it.",
   "DEAL AGREED at 85 USDC. Initiating payment.",
 ];
-
-let buyerTurn = 0;
-
-async function mockGenerate(prompt) {
-  // Simulates token streaming latency from a local LLM
-  await new Promise((r) => setTimeout(r, 400));
-  const response = buyerResponses[Math.min(buyerTurn, buyerResponses.length - 1)];
-  buyerTurn++;
-  return response;
-}
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -51,6 +41,15 @@ export class BuyerAgent {
     this.targetPrice = BUYER_TARGET_PRICE;
     this.systemPrompt = SYSTEM_PROMPT;
     this.history = [];
+    this._turn = 0;
+  }
+
+  async _mockGenerate() {
+    // Simulates token streaming latency from a local LLM
+    await new Promise((r) => setTimeout(r, 400));
+    const response = MOCK_RESPONSES[Math.min(this._turn, MOCK_RESPONSES.length - 1)];
+    this._turn++;
+    return response;
   }
 
   /**
@@ -78,7 +77,7 @@ export class BuyerAgent {
       .filter(Boolean)
       .join("\n");
 
-    const reply = await mockGenerate(fullPrompt);
+    const reply = await this._mockGenerate();
 
     this.history.push(`[SELLER]: ${sellerMessage}`);
     this.history.push(`[BUYER]: ${reply}`);

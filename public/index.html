@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -658,8 +659,8 @@
   function connect() {
     const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
     ws = new WebSocket(`${proto}//${location.host}`);
-    ws.onopen    = () => console.log('[WS] Connected');
-    ws.onclose   = () => { console.log('[WS] Closed. Reconnecting…'); setTimeout(connect, 1800); };
+    ws.onopen    = () => {};
+    ws.onclose   = () => setTimeout(connect, 1800);
     ws.onerror   = (e) => console.error('[WS] Error', e);
     ws.onmessage = (e) => handle(JSON.parse(e.data));
   }
@@ -724,6 +725,7 @@
         addLog('✅', 'Confirmed', `Slot #${ev.slot.toLocaleString()}`);
         setStatus('success', `${ev.amount} USDC Transferred`, 'Transaction confirmed on Solana Devnet');
         showTx(ev.txHash, ev.explorerUrl);
+        fireConfetti();
         document.getElementById('btnStart').disabled = false;
         break;
 
@@ -842,6 +844,36 @@
     document.getElementById('mBudget').textContent = '—';
     document.getElementById('mFloor').textContent  = '—';
     setStatus('idle', 'Standby', 'Awaiting negotiation result');
+  }
+
+  /* ── Confetti ──────────────────────────────────────────────────────────── */
+  function fireConfetti() {
+    const colors = ['#10b981', '#6366f1', '#3b82f6', '#f59e0b', '#a78bfa', '#ffffff'];
+
+    // First burst — centre
+    confetti({
+      particleCount: 100,
+      spread: 65,
+      origin: { x: 0.5, y: 0.58 },
+      colors,
+      ticks: 220,
+      gravity: 0.85,
+      scalar: 1.15,
+    });
+
+    // Second burst — slight delay, wider spread
+    setTimeout(() => {
+      confetti({
+        particleCount: 60,
+        spread: 90,
+        origin: { x: 0.5, y: 0.55 },
+        colors,
+        ticks: 180,
+        gravity: 0.75,
+        scalar: 0.9,
+        startVelocity: 28,
+      });
+    }, 180);
   }
 
   connect();

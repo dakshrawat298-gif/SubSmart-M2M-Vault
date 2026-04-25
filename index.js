@@ -18,7 +18,6 @@ app.use(express.static(join(__dirname, "public")));
 let isRunning = false;
 
 wss.on("connection", (ws) => {
-  console.log("[WS] Client connected");
   ws.send(JSON.stringify({ type: "connected" }));
 
   ws.on("message", async (raw) => {
@@ -46,7 +45,6 @@ wss.on("connection", (ws) => {
       try {
         await runNegotiation(broadcast);
       } catch (err) {
-        console.error("[Negotiation error]", err);
         broadcast({ type: "error", message: err.message });
       } finally {
         isRunning = false;
@@ -55,7 +53,7 @@ wss.on("connection", (ws) => {
     }
   });
 
-  ws.on("close", () => console.log("[WS] Client disconnected"));
+  ws.on("close", () => {});
 });
 
 server.listen(PORT, "0.0.0.0", () => {
