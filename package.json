@@ -21,6 +21,8 @@
   "license": "ISC",
   "dependencies": {
     "@types/node": "^22.13.11",
-    "dotenv": "^16.6.1"
+    "dotenv": "^16.6.1",
+    "express": "^5.2.1",
+    "ws": "^8.20.0"
   }
 }
