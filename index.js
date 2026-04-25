@@ -1,6 +1,7 @@
 import "dotenv/config";
 import { BuyerAgent } from "./src/agent-buyer.js";
 import { SellerAgent } from "./src/agent-seller.js";
+import { executePayment } from "./src/wdk-executor.js";
 
 const MAX_ROUNDS = 5;
 const DEAL_SIGNAL = "DEAL AGREED";
@@ -10,7 +11,7 @@ const DEAL_SIGNAL = "DEAL AGREED";
 function printHeader() {
   console.log("");
   console.log("╔══════════════════════════════════════════════════════╗");
-  console.log("║       SubSmart M2M Negotiator — Phase 2              ║");
+  console.log("║       SubSmart M2M Negotiator — Phase 3              ║");
   console.log("║       Tether Frontier Hackathon                      ║");
   console.log("╚══════════════════════════════════════════════════════╝");
   console.log("");
@@ -25,16 +26,11 @@ function printSpeaker(name, message) {
   console.log(`\n${label}: ${message}\n`);
 }
 
-function printDeal(agreedBy, message) {
+function printDealBanner(agreedBy, message) {
   console.log("");
   console.log("══════════════════════════════════════════════════════");
   console.log(`  ✅ DEAL REACHED — triggered by ${agreedBy}`);
   console.log(`  "${message}"`);
-  console.log("══════════════════════════════════════════════════════");
-  console.log("");
-  console.log("  ➡  Phase 3: Tether WDK will now execute the");
-  console.log("     on-chain payment on Solana. (Coming next.)");
-  console.log("");
   console.log("══════════════════════════════════════════════════════");
   console.log("");
 }
@@ -46,6 +42,26 @@ function printNoDeal() {
   console.log("  Negotiation ended without a transaction.");
   console.log("══════════════════════════════════════════════════════");
   console.log("");
+}
+
+// ── Amount extractor ──────────────────────────────────────────────────────────
+// Matches the first integer or decimal number that appears after a currency
+// keyword or adjacent to "USDC" in the deal message.
+// Examples matched:
+//   "DEAL AGREED at 85 USDC"     → 85
+//   "DEAL AGREED — price: 92.5"  → 92.5
+//   "DEAL AGREED 100USDC"        → 100
+
+function extractAmount(message) {
+  const match = message.match(/(\d+(?:\.\d+)?)\s*USDC/i)
+    || message.match(/(?:at|:|-|for)\s+(\d+(?:\.\d+)?)/i)
+    || message.match(/(\d+(?:\.\d+)?)/);
+
+  if (match) {
+    const amount = parseFloat(match[1]);
+    return isNaN(amount) ? null : amount;
+  }
+  return null;
 }
 
 // ── Core negotiation loop ─────────────────────────────────────────────────────
@@ -72,7 +88,8 @@ async function startNegotiation() {
     printSpeaker(buyer.name, buyerReply);
 
     if (buyerReply.includes(DEAL_SIGNAL)) {
-      printDeal(buyer.name, buyerReply);
+      printDealBanner(buyer.name, buyerReply);
+      await settleDeal(buyerReply);
       return { agreed: true, agreedBy: buyer.name, message: buyerReply };
     }
 
@@ -83,7 +100,8 @@ async function startNegotiation() {
     printSpeaker(seller.name, sellerReply);
 
     if (sellerReply.includes(DEAL_SIGNAL)) {
-      printDeal(seller.name, sellerReply);
+      printDealBanner(seller.name, sellerReply);
+      await settleDeal(sellerReply);
       return { agreed: true, agreedBy: seller.name, message: sellerReply };
     }
 
@@ -93,6 +111,23 @@ async function startNegotiation() {
   // ── No deal within MAX_ROUNDS ─────────────────────────────────────────────
   printNoDeal();
   return { agreed: false };
+}
+
+// ── Settlement: extract amount → execute WDK payment ─────────────────────────
+
+async function settleDeal(dealMessage) {
+  const agreedAmount = extractAmount(dealMessage);
+
+  if (!agreedAmount) {
+    console.warn("  ⚠  Could not extract a numeric amount from the deal message.");
+    console.warn("  ⚠  Skipping WDK payment execution.");
+    return;
+  }
+
+  const receiverAddress =
+    process.env.SELLER_WALLET_ADDRESS || "MockSellerWallet_3kLp...9xRt";
+
+  await executePayment(agreedAmount, receiverAddress);
 }
 
 // ── Entry point ───────────────────────────────────────────────────────────────

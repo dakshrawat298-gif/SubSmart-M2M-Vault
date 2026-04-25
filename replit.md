@@ -36,7 +36,7 @@ Stored securely via Replit Secrets:
 ## Development Phases
 - **Phase 1** ✅ — Project scaffold, file structure, dependency setup
 - **Phase 2** ✅ — AI negotiation logic, QVAC SDK architecture (mock + real swap-in point)
-- **Phase 3** ⏳ — Tether WDK integration, Solana transaction execution
+- **Phase 3** ✅ — Tether WDK integration, Solana USDC SPL-Token transaction execution
 
 ## QVAC SDK Swap-In
 The codebase is fully wired for real LLM inference. When `@qvac/sdk` is installed
