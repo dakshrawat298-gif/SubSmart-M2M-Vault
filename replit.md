@@ -35,8 +35,24 @@ Stored securely via Replit Secrets:
 
 ## Development Phases
 - **Phase 1** ✅ — Project scaffold, file structure, dependency setup
-- **Phase 2** ⏳ — QVAC SDK integration, AI negotiation logic
+- **Phase 2** ✅ — AI negotiation logic, QVAC SDK architecture (mock + real swap-in point)
 - **Phase 3** ⏳ — Tether WDK integration, Solana transaction execution
+
+## QVAC SDK Swap-In
+The codebase is fully wired for real LLM inference. When `@qvac/sdk` is installed
+and a model is available, replace the `mockGenerate()` functions in both agent files
+with the commented-out streaming block:
+```js
+import { LLM } from "@qvac/sdk";
+const llm = await LLM.load({ model: process.env.QVAC_MODEL_PATH });
+// inside respond():
+let reply = "";
+for await (const token of llm.stream(fullPrompt)) {
+  process.stdout.write(token);
+  reply += token;
+}
+return reply.trim();
+```
 
 ## Scripts
 - `npm start` — Run the entry point
