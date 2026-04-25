@@ -175,10 +175,32 @@
       cursor: pointer;
       letter-spacing: -0.1px;
       box-shadow: 0 0 18px rgba(99,102,241,0.32);
-      transition: all 0.2s;
+      transition: all 0.25s;
     }
     .btn-start:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 0 28px rgba(99,102,241,0.5); }
     .btn-start:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+    .btn-start.replay {
+      background: linear-gradient(135deg, #10b981, #059669);
+      box-shadow: 0 0 18px rgba(16,185,129,0.28);
+    }
+    .btn-start.replay:hover:not(:disabled) { box-shadow: 0 0 28px rgba(16,185,129,0.45); }
+
+    .run-badge {
+      display: none;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 11px;
+      border-radius: 20px;
+      background: rgba(16,185,129,0.07);
+      border: 1px solid rgba(16,185,129,0.18);
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #6ee7b7;
+      letter-spacing: 0.3px;
+      font-family: 'JetBrains Mono', monospace;
+      animation: fadeUp 0.35s ease forwards;
+    }
+    .run-badge.visible { display: flex; }
 
     /* ── MAIN GRID ────────────────────────────────────────────────────────── */
     main {
@@ -574,6 +596,7 @@
   </div>
 
   <div class="header-right">
+    <div class="run-badge" id="runBadge">Run #<span id="runCount">0</span></div>
     <div class="net-badge">Solana Devnet</div>
     <button class="btn-start" id="btnStart" onclick="startNegotiation()">
       Start Negotiation
@@ -654,6 +677,7 @@
 
 <script>
   let ws = null;
+  let _runCount = 0;
 
   /* ── WebSocket ─────────────────────────────────────────────────────────── */
   function connect() {
@@ -667,11 +691,26 @@
 
   function send(obj) { if (ws?.readyState === WebSocket.OPEN) ws.send(JSON.stringify(obj)); }
 
-  /* ── Start ─────────────────────────────────────────────────────────────── */
+  /* ── Start / Replay ─────────────────────────────────────────────────────── */
   function startNegotiation() {
+    _runCount++;
+    document.getElementById('runCount').textContent = _runCount;
+    document.getElementById('runBadge').classList.add('visible');
+
+    const btn = document.getElementById('btnStart');
+    btn.disabled = true;
+    btn.classList.remove('replay');
+    btn.textContent = 'Negotiating…';
+
     resetUI();
     send({ action: 'start' });
-    document.getElementById('btnStart').disabled = true;
+  }
+
+  function markDone() {
+    const btn = document.getElementById('btnStart');
+    btn.disabled = false;
+    btn.classList.add('replay');
+    btn.textContent = '↺ Run Again';
   }
 
   /* ── Event handler ─────────────────────────────────────────────────────── */
@@ -726,22 +765,22 @@
         setStatus('success', `${ev.amount} USDC Transferred`, 'Transaction confirmed on Solana Devnet');
         showTx(ev.txHash, ev.explorerUrl);
         fireConfetti();
-        document.getElementById('btnStart').disabled = false;
+        markDone();
         break;
 
       case 'no_deal':
         setStatus('idle', 'No Deal', 'Max rounds reached — no agreement');
         document.getElementById('bounceDots').classList.remove('active');
-        document.getElementById('btnStart').disabled = false;
+        markDone();
         break;
 
       case 'error':
         console.error('Server error:', ev.message);
-        document.getElementById('btnStart').disabled = false;
+        markDone();
         break;
 
       case 'done':
-        document.getElementById('btnStart').disabled = false;
+        markDone();
         break;
     }
   }
