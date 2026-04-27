@@ -1,36 +1,37 @@
 <div align="center">
 
-<br />
-
-```
+~~~text
   ███████╗██╗   ██╗██████╗ ███████╗███╗   ███╗ █████╗ ██████╗ ████████╗
   ██╔════╝██║   ██║██╔══██╗██╔════╝████╗ ████║██╔══██╗██╔══██╗╚══██╔══╝
   ███████╗██║   ██║██████╔╝███████╗██╔████╔██║███████║██████╔╝   ██║   
   ╚════██║██║   ██║██╔══██╗╚════██║██║╚██╔╝██║██╔══██║██╔══██╗   ██║   
   ███████║╚██████╔╝██████╔╝███████║██║ ╚═╝ ██║██║  ██║██║  ██║   ██║   
   ╚══════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝  
-```
+~~~
 
-# SubSmart Agentic Vault
-
+# Audd Flow Agentic Vault
 ### *Machines don't negotiate. Ours do.*
 
-**The world's first autonomous M2M negotiation engine powered by Tether QVAC + WDK on Solana.**  
+**The world's first autonomous M2M negotiation engine powered by Tether QVAC + WDK on Solana.**<br>
 Two AI agents — zero human involvement — from opening bid to on-chain USDC settlement.
 
-<br />
-
-[![Built for Tether Frontier Hackathon](https://img.shields.io/badge/Tether_Frontier-Hackathon_2025-00b67a?style=for-the-badge&logo=tether&logoColor=white)](https://tether.io)
-[![Solana Devnet](https://img.shields.io/badge/Solana-Devnet-9945FF?style=for-the-badge&logo=solana&logoColor=white)](https://solana.com)
-[![QVAC + WDK](https://img.shields.io/badge/Tether-QVAC_+_WDK-26a17b?style=for-the-badge)](https://tether.io)
-[![Node.js](https://img.shields.io/badge/Node.js-20+-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
+[![Live Demo](https://img.shields.io/badge/🔴_LIVE_DEMO-AWS_EC2-FF0000?style=for-the-badge)](http://34.203.203.156:5000)
+[![Pitch Video](https://img.shields.io/badge/▶️_PITCH_VIDEO-YouTube-FF0000?style=for-the-badge)](https://youtube.com/shorts/ZzsXv2fAx78?si=B2LRwMuoCMrW8-Gx)
+[![Hackathon](https://img.shields.io/badge/Built_for-Tether_Frontier_Hackathon-00AAFF?style=for-the-badge)](#)
+[![Network](https://img.shields.io/badge/Solana-Devnet-14F195?style=for-the-badge)](#)
+[![Stack](https://img.shields.io/badge/Stack-QVAC_+_WDK-323330?style=for-the-badge)](#)
 
 </div>
 
 ---
 
-## The Problem: Human Wallets Are a Bottleneck in the Machine Economy
+## ⚡️ Live Demo & Video ⚡️
+* **Live Server:** 🔗 **[http://34.203.203.156:5000](http://34.203.203.156:5000)** *(Note: Use `http://`)*
+* **Pitch Video:** 🔗 **[Watch on YouTube](https://youtube.com/shorts/ZzsXv2fAx78?si=B2LRwMuoCMrW8-Gx)**
 
+---
+
+## The Problem: Human Wallets Are a Bottleneck in the Machine Economy
 The global digital economy is accelerating toward full autonomy — IoT devices provisioning each other, AI agents licensing APIs, microservices paying for compute in real time. But every single payment in today's stack still requires a human to sign a transaction, approve a smart contract, or manage a wallet.
 
 This is not a software problem. It's an architectural one.
@@ -45,53 +46,45 @@ This is not a software problem. It's an architectural one.
 | **Trust Surface** | Private keys in human custody are the #1 attack vector in crypto |
 
 The autonomous M2M economy is not coming — it is here. The infrastructure to support it is not.
-
-**SubSmart Agentic Vault is that infrastructure.**
-
----
+**Audd Flow Agentic Vault is that infrastructure.**
 
 ## The Solution: Autonomous Machine-to-Machine Negotiation and Settlement
+Audd Flow deploys two independent AI agents that negotiate a service price from first principles and settle the agreed amount on-chain — with **zero human involvement at any step**.
 
-SubSmart deploys two independent AI agents that negotiate a service price from first principles and settle the agreed amount on-chain — with **zero human involvement at any step**.
-
-```
+~~~text
 ┌─────────────────────────────────────────────────────────────────┐
-│                    SubSmart Agentic Vault                       │
+│                    Audd Flow Agentic Vault                      │
 │                                                                 │
-│   ┌──────────────┐    QVAC P2P LLM     ┌──────────────────┐   │
-│   │  Buyer Agent │◄──────────────────► │   Seller Agent   │   │
-│   │  (QVAC SDK)  │   natural language  │   (QVAC SDK)     │   │
-│   └──────┬───────┘     negotiation     └────────┬─────────┘   │
-│          │                                       │             │
-│          │         DEAL AGREED signal            │             │
-│          └──────────────┬────────────────────────┘             │
+│   ┌──────────────┐    QVAC P2P LLM     ┌──────────────────┐     │
+│   │  Buyer Agent │◄──────────────────► │   Seller Agent   │     │
+│   │  (QVAC SDK)  │   natural language  │   (QVAC SDK)     │     │
+│   └──────┬───────┘     negotiation     └────────┬─────────┘     │
+│          │                                      │               │
+│          │         DEAL AGREED signal           │               │
+│          └──────────────┬───────────────────────┘               │
 │                         │                                       │
-│                  ┌──────▼──────┐                               │
-│                  │ WDK Executor │                               │
-│                  │ Self-Custody │                               │
-│                  │   Machine    │                               │
-│                  │   Wallet     │                               │
-│                  └──────┬──────┘                               │
+│                  ┌──────▼──────┐                                │
+│                  │ WDK Executor│                                │
+│                  │ Self-Custody│                                │
+│                  │   Machine   │                                │
+│                  │   Wallet    │                                │
+│                  └──────┬──────┘                                │
 │                         │  SPL-Token USDC Transfer              │
 │                         ▼                                       │
-│                  ┌─────────────┐                               │
-│                  │   Solana    │                               │
-│                  │   Devnet    │                               │
-│                  └─────────────┘                               │
+│                  ┌─────────────┐                                │
+│                  │   Solana    │                                │
+│                  │   Devnet    │                                │
+│                  └─────────────┘                                │
 └─────────────────────────────────────────────────────────────────┘
-```
-
----
+~~~
 
 ## Core Technology Stack
 
 ### Tether QVAC — Local P2P Intelligence
+QVAC is Tether's privacy-first, local LLM execution framework. Unlike cloud-based AI, QVAC runs entirely on-device with **no data leaving the machine** — making it the only credible intelligence layer for autonomous financial agents.
 
-[QVAC](https://qvac.tether.io) is Tether's privacy-first, local LLM execution framework. Unlike cloud-based AI, QVAC runs entirely on-device with **no data leaving the machine** — making it the only credible intelligence layer for autonomous financial agents.
-
-In SubSmart, each agent runs its own QVAC-powered LLM instance:
-
-```javascript
+In Audd Flow, each agent runs its own QVAC-powered LLM instance:
+~~~javascript
 // Real QVAC SDK integration (swap-in ready)
 import { LLM } from "@qvac/sdk";
 const llm = await LLM.load({ model: process.env.QVAC_MODEL_PATH });
@@ -100,19 +93,16 @@ const llm = await LLM.load({ model: process.env.QVAC_MODEL_PATH });
 for await (const token of llm.stream(prompt)) {
   reply += token;
 }
-```
-
-- **Buyer Agent** — negotiates the price of a Smart Contract Audit DOWN from the seller's ask
-- **Seller Agent** — defends its margin, counters offers, and settles when the floor is met
-- Both agents maintain conversation history, reason about constraints, and emit a `DEAL AGREED` signal when consensus is reached
+~~~
+* **Buyer Agent** — negotiates the price of a Smart Contract Audit DOWN from the seller's ask
+* **Seller Agent** — defends its margin, counters offers, and settles when the floor is met
+* Both agents maintain conversation history, reason about constraints, and emit a DEAL AGREED signal when consensus is reached
 
 ### Tether WDK — Self-Custodial Machine Wallets
+WDK is Tether's Web Dev Kit for programmatic, self-custodial wallet management. It is the only framework purpose-built for machines to hold, manage, and transfer value without human key custody.
 
-[WDK](https://wdk.tether.io) is Tether's Web Dev Kit for programmatic, self-custodial wallet management. It is the only framework purpose-built for machines to hold, manage, and transfer value without human key custody.
-
-In SubSmart, WDK executes the USDC SPL-Token transfer the moment a deal is detected:
-
-```javascript
+In Audd Flow, WDK executes the USDC SPL-Token transfer the moment a deal is detected:
+~~~javascript
 // Real WDK integration (swap-in ready)
 import { WDK } from "@tetherto/wdk-node";
 
@@ -127,50 +117,39 @@ const tx = await wallet.transfer({
 });
 
 await tx.signAndSend();
-```
-
+~~~
 **Why this matters:** WDK turns a Solana keypair into an autonomous treasury. No Phantom. No MetaMask. No human.
 
 ### Solana — The Settlement Layer
-
-Solana's 400ms block time and sub-$0.001 transaction fees make it the only L1 viable for real-time M2M micro-payments. SubSmart uses:
-
-- **Network:** Solana Devnet
-- **Token:** USDC SPL-Token (`4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU`)
-- **Decimals:** 6 (USDC standard)
-- **Explorer:** [Solana Explorer — Devnet](https://explorer.solana.com/?cluster=devnet)
-
----
+Solana's 400ms block time and sub-$0.001 transaction fees make it the only L1 viable for real-time M2M micro-payments. Audd Flow uses:
+* **Network:** Solana Devnet
+* **Token:** USDC SPL-Token (`4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU`)
+* **Decimals:** 6 (USDC standard)
+* **Explorer:** Solana Explorer — Devnet
 
 ## How to Run
 
 ### Prerequisites
-
-- [Node.js](https://nodejs.org) v20 or higher
-- `npm` or `pnpm`
+* Node.js v20 or higher
+* npm or pnpm
 
 ### 1. Clone the repository
-
-```bash
-git clone https://github.com/your-org/subsmart-agentic-vault.git
+~~~bash
+git clone [https://github.com/your-org/subsmart-agentic-vault.git](https://github.com/your-org/subsmart-agentic-vault.git)
 cd subsmart-agentic-vault
-```
+~~~
 
 ### 2. Install dependencies
-
-```bash
+~~~bash
 npm install
-```
+~~~
 
 ### 3. Configure environment variables
-
-```bash
+~~~bash
 cp .env.example .env
-```
-
+~~~
 Edit `.env`:
-
-```env
+~~~env
 # Agent economics
 BUYER_BUDGET=100
 BUYER_TARGET_PRICE=60
@@ -183,56 +162,41 @@ BUYER_PRIVATE_KEY=<your_devnet_private_key_base58>
 
 # QVAC (optional — mock is used if not set)
 QVAC_MODEL_PATH=./models/llama-3.1-8b.gguf
-```
+~~~
 
 ### 4. Start the application
-
-```bash
+~~~bash
 node index.js
-```
-
+~~~
 Open your browser at `http://localhost:5000` and press **Start Negotiation**.
 
----
-
 ## Enabling Real Tether QVAC + WDK
-
 The codebase is architected for a **one-line swap** from mock to production SDK.
 
 ### Swap in QVAC (both agents)
-
 In `src/agent-buyer.js` and `src/agent-seller.js`, replace the mock with:
-
-```javascript
+~~~javascript
 import { LLM } from "@qvac/sdk";
 const llm = await LLM.load({ model: process.env.QVAC_MODEL_PATH });
-```
-
+~~~
 Then in the `respond()` method, replace `this._mockGenerate()` with:
-
-```javascript
+~~~javascript
 let reply = "";
 for await (const token of llm.stream(fullPrompt)) {
   reply += token;
 }
 return reply.trim();
-```
+~~~
 
 ### Swap in WDK (executor)
-
 In `src/wdk-executor.js`, replace `MockWDK` with:
-
-```javascript
+~~~javascript
 import { WDK } from "@tetherto/wdk-node";
-```
-
+~~~
 No other changes required. The payload structure, broadcast events, and UI are all production-ready.
 
----
-
 ## Project Architecture
-
-```
+~~~text
 subsmart-agentic-vault/
 ├── index.js                  # Express server + WebSocket hub
 ├── src/
@@ -245,10 +209,9 @@ subsmart-agentic-vault/
 │   └── favicon.svg
 ├── .env                      # Environment configuration
 └── package.json
-```
+~~~
 
 ### Real-Time Event Stream
-
 All negotiation events are streamed over WebSocket from server → browser in real time:
 
 | Event | Trigger |
@@ -263,19 +226,14 @@ All negotiation events are streamed over WebSocket from server → browser in re
 | `payment_success` | Block confirmed — TX hash returned |
 | `no_deal` | Max rounds reached, no consensus |
 
----
-
-## Live Demo
-
+## Live Demo Experience
 The dashboard renders the full negotiation in real time — every agent message, every WDK execution step, and the final on-chain transaction hash — with confetti on settlement.
 
 **Run it as many times as you like.** The `↺ Run Again` button resets the entire state cleanly between demos, with a persistent run counter so judges can see the system is stateless by design.
 
----
+## Why Audd Flow Wins the M2M Economy
 
-## Why SubSmart Wins the M2M Economy
-
-| Traditional Payment Flow | SubSmart Agentic Vault |
+| Traditional Payment Flow | Audd Flow Agentic Vault |
 |---|---|
 | Human opens wallet app | Machine wallet auto-loads via WDK |
 | Human reads invoice | Buyer AI negotiates price down autonomously |
@@ -284,24 +242,17 @@ The dashboard renders the full negotiation in real time — every agent message,
 | Human checks confirmation | UI streams TX hash + explorer link live |
 | **~minutes to hours** | **~seconds, end-to-end** |
 
----
-
 ## Built With Tether's Vision
-
 Tether's QVAC and WDK are not coincidental tools in this stack — they are the entire thesis:
+* **QVAC** enables private, local intelligence at the edge. Machines reason without calling home.
+* **WDK** enables self-custodial machine wallets. Machines hold and transfer value without humans.
+* **Together**, they create the primitive stack for the autonomous M2M financial internet.
 
-- **QVAC** enables private, local intelligence at the edge. Machines reason without calling home.
-- **WDK** enables self-custodial machine wallets. Machines hold and transfer value without humans.
-- **Together**, they create the primitive stack for the autonomous M2M financial internet.
-
-SubSmart is a proof-of-concept that this stack is **production-ready today**.
+Audd Flow is a proof-of-concept that this stack is **production-ready today**.
 
 ---
-
 <div align="center">
-
-*Built for the Tether Frontier Hackathon · Solana Devnet · USDC SPL-Token*
-
-**The machines are ready to trade. Are you?**
-
+  <br>
+  <em>Built for the Tether Frontier Hackathon · Solana Devnet · USDC SPL-Token</em><br>
+  <strong>The machines are ready to trade. Are you?</strong>
 </div>
