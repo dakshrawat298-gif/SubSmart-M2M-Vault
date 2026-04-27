@@ -9,7 +9,7 @@
   ╚══════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝  
 ~~~
 
-# Audd Flow Agentic Vault
+# SubSmart M2M Vault
 ### *Machines don't negotiate. Ours do.*
 
 **The world's first autonomous M2M negotiation engine powered by Tether QVAC + WDK on Solana.**<br>
